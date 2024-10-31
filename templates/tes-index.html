@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omura Laboratory</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #18181b;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease-in-out;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            box-sizing: border-box; /* Add this to include padding in width calculation */
+        }
+        .sidebar h1 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+            word-wrap: break-word; /* Add this to handle long words */
+        }
+        .sidebar p {
+            font-size: 0.875rem;
+            color: #a1a1aa;
+            margin: 0 0 10px 0;
+            word-wrap: break-word; /* Add this to handle long words */
+        }
+        .nav-links {
+            margin-top: 20px;
+            width: 100%; /* Ensure full width */
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: background-color 0.3s;
+            white-space: normal; /* Allow text to wrap */
+            word-wrap: break-word; /* Handle long words */
+        }
+        .nav-links a:hover {
+            background-color: #27272a;
+            border-radius: 5px;
+        }
+        .language-toggle {
+            margin-top: auto;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width button */
+        }
+        .language-toggle:hover {
+            background-color: #27272a;
+        }
+        .contact-info {
+            margin-top: 20px;
+            background-color: #27272a;
+            padding: 15px;
+            font-size: 0.875rem;
+            word-wrap: break-word; /* Handle long words */
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .main-content {
+            flex-grow: 1;
+            margin-left: 250px;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 250px;
+            z-index: 10;
+        }
+        .social-links a, .contact-button {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #3b82f6;
+        }
+        .contact-button {
+            padding: 8px 16px;
+            border: 1px solid #3b82f6;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .contact-button:hover {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .content p {
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 15px;
+        }
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background-color: #18181b;
+            border-radius: 5px;
+        }
+        .hamburger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        header.masthead {
+            margin: 0;
+            background: no-repeat center center;
+            background-color: #868e96;
+            background-attachment: scroll;
+            position: relative;
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+        }
+        header.masthead .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #212529;
+            opacity: 0.5;
+        }
+        header.masthead .page-heading,
+        header.masthead .post-heading,
+        header.masthead .site-heading {
+            padding: 0;
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        header.masthead .page-heading h1,
+        header.masthead .site-heading h1 {
+            font-size: 50px;
+            margin-top: 0;
+            text-align: center;
+        }
+        header.masthead .page-heading .subheading,
+        header.masthead .site-heading .subheading {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin: 10px 0 0;
+            font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+        @media only screen and (min-width: 768px) {
+            header.masthead .page-heading h1,
+            header.masthead .site-heading h1 {
+                font-size: 80px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                height: 100vh;
+                z-index: 999;
+            }
+            .sidebar.active {
+                transform: translateX(250px);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .hamburger-menu {
+                display: block;
+            }
+            .header {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger-menu" onclick="toggleSidebar()" aria-label="Toggle menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div>
+                <h1>Omura Laboratory</h1>
+                <p>Kyushu Institute of Technology</p>
+                <p>Graduate School of Life Science and Systems Engineering</p>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Research Introduction</a>
+                <a href="#">Laboratory Introduction</a>
+                <a href="#">Student Recruitment</a>
+                <a href="#">Link</a>
+                <a href="#">Contact Us</a>
+            </nav>
+            <button class="language-toggle">English</button>
+            <div class="contact-info">
+                <p>If you would like to visit our laboratory, we accept your request at any time.</p>
+                <p>Email: contact@example.com</p>
+                <p>Phone: (093) 695-6037</p>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                </div>
+                <a href="#" class="contact-button">CONTACT</a>
+            </header>
+
+            <!-- Page Header -->
+            <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1470092306007-055b6797ca72?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80')">
+                <div class="overlay"></div>
+                <div class="site-heading">
+                    <h1>Data Science and Artificial Intelligence (DSAI) Laboratory</h1>
+                    <span class="subheading">Welcome to Data Science and Artificial Intelligence (DSAI) Laboratory Website.</span>
+                </div>
+            </header>
+
+            <section class="content">
+                <h2>Greetings</h2>
+                <p>
+                    At the Omura Laboratory, we are conducting research into power electronics and power
+                    semiconductors that will accelerate the efficient use of energy, with the keywords of
+                    'energy conservation' and 'CO2 reduction.'
+                </p>
+                <p>
+                    We are characterized by our comprehensive capabilities that cover everything from
+                    materials and devices to systems, and we contribute to the realization of a low-carbon
+                    society through the promotion of energy conservation, advanced electricity utilization
+                    technologies, and the use of natural energy.
+                </p>
+                <p>
+                    Recently, its applications have expanded to include electric vehicles, wind power
+                    generation, solar power generation, and highly efficient power transmission, and it has
+                    been attracting worldwide attention.
+                </p>
+            </section>
+        </main>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const hamburger = document.querySelector('.hamburger-menu');
+            sidebar.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

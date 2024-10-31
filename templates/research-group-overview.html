@@ -1,0 +1,127 @@
+{% include "header.html" %}
+{% block content %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Research Group</h1>
+                    <span class="subheading">Learn about our team and research</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h1>Research Group Overview</h1>
+
+            <!-- Research Group Introduction -->
+            <div class="research-intro mb-5">
+                <h2>About Our Research</h2>
+                <p>Our research group focuses on [your research area]. We are dedicated to advancing knowledge in
+                    [specific field] through innovative research and collaboration.</p>
+            </div>
+
+            <!-- Team Members -->
+            <div class="team-members mb-5">
+                <h2>Team Members</h2>
+
+                <!-- Principal Investigator -->
+                <div class="team-member">
+                    <h3>Principal Investigator</h3>
+                    <div class="member-info">
+                        <h4>Dr. [Name]</h4>
+                        <p>Specialization: [Area]</p>
+                        <p>Email: [email@domain.com]</p>
+                    </div>
+                </div>
+
+                <!-- Research Associates -->
+                <div class="team-member">
+                    <h3>Research Associates</h3>
+                    <ul>
+                        <li>
+                            <h4>[Name]</h4>
+                            <p>Research focus: [Area]</p>
+                        </li>
+                        <!-- Add more research associates as needed -->
+                    </ul>
+                </div>
+
+                <!-- PhD Students -->
+                <div class="team-member">
+                    <h3>PhD Students</h3>
+                    <ul>
+                        <li>
+                            <h4>[Name]</h4>
+                            <p>Thesis topic: [Topic]</p>
+                        </li>
+                        <!-- Add more PhD students as needed -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Current Projects -->
+            <div class="current-projects mb-5">
+                <h2>Current Projects</h2>
+                <div class="project">
+                    <h3>[Project Title]</h3>
+                    <p>[Brief project description]</p>
+                </div>
+                <!-- Add more projects as needed -->
+            </div>
+
+            <!-- Publications -->
+            <div class="publications mb-5">
+                <h2>Recent Publications</h2>
+                <ul>
+                    <li>[Author(s)] ([Year]). [Title]. [Journal], [Volume](Issue), [Pages].</li>
+                    <!-- Add more publications as needed -->
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>For research collaboration inquiries or more information about our work, please contact:</p>
+                <p>Email: [contact@domain.com]</p>
+                <p>Address: [Your Institution]<br>[Street Address]<br>[City, State, ZIP]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .team-member {
+        margin-bottom: 2rem;
+    }
+
+    .member-info {
+        margin-left: 1rem;
+    }
+
+    .publications ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .publications li {
+        margin-bottom: 1rem;
+    }
+
+    .project {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<hr>
+
+{% endblock %}
+{% include "footer.html" %}

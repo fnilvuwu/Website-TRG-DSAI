@@ -1,0 +1,98 @@
+{% include "header.html" %}
+{% block content %}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Activities</h1>
+                    <span class="subheading">Meet the people behind our research</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <!-- Principal Investigator -->
+            <div class="team-member">
+                <h2>Principal Investigator</h2>
+                <div class="member-info">
+                    <h3>Dr. [Name]</h3>
+                    <p>Specialization: [Area]</p>
+                    <p>Email: [email@domain.com]</p>
+                    <p>[Brief bio or research interests]</p>
+                </div>
+            </div>
+
+            <!-- Research Associates -->
+            <div class="team-member">
+                <h2>Research Associates</h2>
+                <div class="member-info">
+                    <div class="member">
+                        <h3>[Name]</h3>
+                        <p>Research focus: [Area]</p>
+                        <p>[Brief bio]</p>
+                    </div>
+                    <!-- Add more research associates as needed -->
+                </div>
+            </div>
+
+            <!-- PhD Students -->
+            <div class="team-member">
+                <h2>PhD Students</h2>
+                <div class="member-info">
+                    <div class="member">
+                        <h3>[Name]</h3>
+                        <p>Thesis topic: [Topic]</p>
+                        <p>[Brief description of research]</p>
+                    </div>
+                    <!-- Add more PhD students as needed -->
+                </div>
+            </div>
+
+            <!-- Masters Students -->
+            <div class="team-member">
+                <h2>Masters Students</h2>
+                <div class="member-info">
+                    <div class="member">
+                        <h3>[Name]</h3>
+                        <p>Research focus: [Area]</p>
+                        <p>[Brief description]</p>
+                    </div>
+                    <!-- Add more masters students as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<style>
+    .team-member {
+        margin-bottom: 3rem;
+    }
+    
+    .member-info {
+        margin-left: 1rem;
+    }
+    
+    .member {
+        margin-bottom: 2rem;
+    }
+    
+    .member h3 {
+        color: #0085A1;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+{% endblock %}
+{% include "footer.html" %}
