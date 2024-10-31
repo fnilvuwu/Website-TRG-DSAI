@@ -16,10 +16,7 @@ from flask_login import (
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
-from dotenv import load_dotenv
 import os
-
-load_dotenv()  # Load environment variables from .env file
 
 # Debugging prints
 print("FLASK_KEY:", os.environ.get("FLASK_KEY"))
